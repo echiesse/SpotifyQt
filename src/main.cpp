@@ -1,5 +1,9 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include "Config.h"
+
+Config config("config.cfg");
+Config appState("app.data");
 
 int main(int argc, char *argv[])
 {

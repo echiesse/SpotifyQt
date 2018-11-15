@@ -6,13 +6,17 @@
 #include <QString>
 
 #include "clientid.h"
+#include "Config.h"
+#include "IOFunctions.h"
 #include "request.h"
-#include "SpotifyApiClient.h"
 
+extern Config config;
+extern Config appState;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    spotify(config["CLIENT_ID"], config["CLIENT_SECRET"])
 {
     ui->setupUi(this);
 }
@@ -37,17 +41,34 @@ int showMessageBox(QString text)
 
 void MainWindow::on_btOk_clicked()
 {
-    requestToken();
+    ui->monitor->setText("Pesquisando música:");
+    auto res = queryTrack();
+    ui->monitor->append(res);
+    ui->monitor->append("");
+    ui->monitor->append("Pesquisa concluida !");
+}
+
+
+QString MainWindow::queryTrack()
+{
+    if (!spotify.isAuthenticated())
+    {
+        requestToken();
+    }
+    auto res = spotify.queryTracks(
+        "Dona roupa",
+        "track",
+        "BR"
+    );
+    return res;
 }
 
 
 void MainWindow::requestToken()
 {
-    SpotifyApiClient client(CLIENT_ID, CLIENT_SECRET);
-    client.requestToken();
-    ui->monitor->setText("Resposta:");
-    ui->monitor->append(QString("Token = ") + client.getAccessToken());
-    ui->monitor->append("Fim !!");
+    spotify.requestToken();
+    appState.setValue("SPOTIFY_TOKEN", spotify.getAccessToken().toStdString());
+    appState.save();
 }
 
 

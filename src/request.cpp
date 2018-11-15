@@ -26,14 +26,17 @@ void request::reset()
 
 QByteArray request::get(QUrl url)
 {
-    return get(url, emptyHeader());
+    return get(url, emptyHeader(), ParamMap());
 }
 
 
-QByteArray request::get(QUrl url, ParamMap headers)
+QByteArray request::get(QUrl url, ParamMap headers, ParamMap params)
 {
     reset();
     QNetworkReply* reply;
+    QUrlQuery queryString = buildPostData(params); // TODO: buildPostData tem que mudar de nome <<<<<
+    QString qs = queryString.toString(QUrl::FullyEncoded).toUtf8();
+    url.setQuery(qs);
     QNetworkRequest request = buildRequest(url, headers);
     reply = manager.get(request);
     return processReply(reply);

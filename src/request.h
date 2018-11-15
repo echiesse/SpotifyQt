@@ -30,7 +30,7 @@ class request : public QObject
 
     public:
         request();
-        QByteArray get(QUrl url, ParamMap headers);
+        QByteArray get(QUrl url, ParamMap headers, ParamMap params);
         QByteArray get(QUrl url);
         QByteArray post(QUrl url, ParamMap headers, ParamMap data);
         static ParamMap emptyHeader();

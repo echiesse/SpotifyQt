@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT += core gui networkauth
+QT += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,17 +25,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        request.cpp \
-        main.cpp \
-        mainwindow.cpp \
+    util.cpp \
+    Config.cpp \
+    IOFunctions.cpp \
+    request.cpp \
     SpotifyApiClient.cpp \
-    util.cpp
+    main.cpp \
+    mainwindow.cpp \
+    TrackInfo.cpp
 
 HEADERS += \
-        request.h \
-        mainwindow.h \
+    request.h \
+    mainwindow.h \
     SpotifyApiClient.h \
-    util.h
+    util.h \
+    Config.h \
+    Functional.hpp \
+    IOFunctions.h \
+    TrackInfo.h
 
 FORMS += \
         mainwindow.ui

@@ -5,6 +5,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include "SpotifyApiClient.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,9 +25,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-
+    SpotifyApiClient spotify;
     void testGetRequest();
     void requestToken();
+    QString queryTrack();
 };
 
 #endif // MAINWINDOW_H
