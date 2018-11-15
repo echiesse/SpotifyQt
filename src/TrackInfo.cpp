@@ -7,7 +7,7 @@ TrackInfo::TrackInfo(QString id, QString name, QString artist, QString previewUr
 }
 
 
-QString TrackInfo::show()
+QString TrackInfo::show() const
 {
     QString ret;
     ret += id + "\n";

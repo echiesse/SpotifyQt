@@ -31,21 +31,27 @@ SOURCES += \
     request.cpp \
     SpotifyApiClient.cpp \
     main.cpp \
-    mainwindow.cpp \
-    TrackInfo.cpp
+    TrackInfo.cpp \
+    searchwindow.cpp \
+    SearchResultWidget.cpp \
+    MainWindow.cpp
 
 HEADERS += \
     request.h \
-    mainwindow.h \
     SpotifyApiClient.h \
     util.h \
     Config.h \
     Functional.hpp \
     IOFunctions.h \
-    TrackInfo.h
+    TrackInfo.h \
+    searchwindow.h \
+    SearchResultWidget.h \
+    MainWindow.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    searchwindow.ui \
+    SearchResultWidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

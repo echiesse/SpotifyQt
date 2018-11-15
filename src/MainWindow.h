@@ -6,6 +6,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include "SpotifyApiClient.h"
+#include "TrackInfo.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,13 +23,11 @@ public:
 private slots:
     void on_btOk_clicked();
     void on_btCancel_clicked();
+    void onTrackChosen(const TrackInfo& track);
 
 private:
     Ui::MainWindow *ui;
-    SpotifyApiClient spotify;
     void testGetRequest();
-    void requestToken();
-    QString queryTrack();
 };
 
 #endif // MAINWINDOW_H

@@ -5,18 +5,17 @@
 #include <QMessageBox>
 #include <QString>
 
-#include "clientid.h"
 #include "Config.h"
 #include "IOFunctions.h"
 #include "request.h"
+#include "searchwindow.h"
 
 extern Config config;
 extern Config appState;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    spotify(config["CLIENT_ID"], config["CLIENT_SECRET"])
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 }
@@ -41,41 +40,25 @@ int showMessageBox(QString text)
 
 void MainWindow::on_btOk_clicked()
 {
-    ui->monitor->setText("Pesquisando música:");
-    auto res = queryTrack();
-    ui->monitor->append(res);
-    ui->monitor->append("");
-    ui->monitor->append("Pesquisa concluida !");
-}
-
-
-QString MainWindow::queryTrack()
-{
-    if (!spotify.isAuthenticated())
-    {
-        requestToken();
-    }
-    auto res = spotify.queryTracks(
-        "Dona roupa",
-        "track",
-        "BR"
+    auto searchWindow = new SearchWindow(this);
+    connect(
+        searchWindow, &SearchWindow::trackChosen,
+        this, &MainWindow::onTrackChosen
     );
-    return res;
+    searchWindow->setWindowModality(Qt::ApplicationModal);
+    searchWindow->show();
 }
 
 
-void MainWindow::requestToken()
+void MainWindow::onTrackChosen(const TrackInfo& track)
 {
-    spotify.requestToken();
-    appState.setValue("SPOTIFY_TOKEN", spotify.getAccessToken().toStdString());
-    appState.save();
+    ui->monitor->setText(track.show());
 }
-
 
 void MainWindow::testGetRequest()
 {
     request req;
-    QUrl url(ui->inputUrl->text());
+    QUrl url("http://example.com");
     auto res = req.get(url);
     ui->monitor->setText("Resposta:");
     ui->monitor->append(res);
