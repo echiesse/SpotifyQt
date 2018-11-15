@@ -1,4 +1,4 @@
-#include "searchwindow.h"
+#include "SearchWindow.h"
 #include "ui_searchwindow.h"
 #include "SearchResultWidget.h"
 #include "Config.h"
@@ -30,10 +30,12 @@ SearchWindow::SearchWindow(QWidget *parent) :
     );
 }
 
+
 SearchWindow::~SearchWindow()
 {
     delete ui;
 }
+
 
 void SearchWindow::on_btOk_clicked()
 {

@@ -30,11 +30,11 @@ SOURCES += \
     IOFunctions.cpp \
     request.cpp \
     SpotifyApiClient.cpp \
-    main.cpp \
     TrackInfo.cpp \
-    searchwindow.cpp \
+    SearchWindow.cpp \
     SearchResultWidget.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    main.cpp
 
 HEADERS += \
     request.h \
@@ -44,13 +44,13 @@ HEADERS += \
     Functional.hpp \
     IOFunctions.h \
     TrackInfo.h \
-    searchwindow.h \
+    SearchWindow.h \
     SearchResultWidget.h \
     MainWindow.h
 
 FORMS += \
-        mainwindow.ui \
-    searchwindow.ui \
+    MainWindow.ui \
+    SearchWindow.ui \
     SearchResultWidget.ui
 
 # Default rules for deployment.
