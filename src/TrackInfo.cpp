@@ -20,3 +20,27 @@ QString TrackInfo::show() const
     ret += artist;
     return ret;
 }
+
+
+QString TrackInfo::getId() const
+{
+    return id;
+}
+
+
+QString TrackInfo::getName() const
+{
+    return name;
+}
+
+
+QString TrackInfo::getArtist() const
+{
+    return artist;
+}
+
+
+QString TrackInfo::getPreviewUrl() const
+{
+    return previewUrl;
+}

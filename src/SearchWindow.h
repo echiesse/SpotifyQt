@@ -2,6 +2,7 @@
 #define SEARCHWINDOW_H
 
 #include <QMainWindow>
+#include "SearchResultWidget.h"
 #include "SpotifyApiClient.h"
 #include "TrackInfo.h"
 
@@ -23,10 +24,14 @@ class SearchWindow : public QMainWindow
         QString queryTrack();
         void requestToken();
         void testQueryTrack();
+        SearchResultWidget* widgetFromTrack(const TrackInfo& track);
+        void showSearchResults(const QVector<TrackInfo>& tracks);
 
     private slots:
         void on_btOk_clicked();
         void on_trackChosen(const TrackInfo& track);
+
+        void on_btSearch_clicked();
 
     signals:
         void trackChosen(const TrackInfo& track);

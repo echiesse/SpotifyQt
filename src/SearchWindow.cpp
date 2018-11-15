@@ -1,6 +1,5 @@
 #include "SearchWindow.h"
-#include "ui_searchwindow.h"
-#include "SearchResultWidget.h"
+#include "ui_SearchWindow.h"
 #include "Config.h"
 
 #include "Functional.hpp"
@@ -15,21 +14,6 @@ SearchWindow::SearchWindow(QWidget *parent) :
     spotify(config["CLIENT_ID"], config["CLIENT_SECRET"])
 {
     ui->setupUi(this);
-    auto searchResult = new SearchResultWidget(ui->container);
-    searchResult->setArtist("Michael Jackson");
-    searchResult->setTrackName("Beat It");
-    connect(
-        searchResult, &SearchResultWidget::trackChosen,
-        this, &SearchWindow::on_trackChosen
-    );
-    auto searchResult2 = new SearchResultWidget(ui->container);
-    searchResult2->setArtist("Roupa Nova");
-    searchResult2->setTrackName("Dona");
-    searchResult2->move(0, searchResult->height());
-    connect(
-        searchResult2, &SearchResultWidget::trackChosen,
-        this, &SearchWindow::on_trackChosen
-    );
 }
 
 
@@ -47,21 +31,7 @@ void SearchWindow::on_btOk_clicked()
 
 QString SearchWindow::queryTrack()
 {
-    if (!spotify.isAuthenticated())
-    {
-        requestToken();
-    }
-    auto tracks = spotify.queryTracks(
-        "Dona roupa",
-        "track",
-        "BR"
-    );
-
-    QVector<QString> results;
-    fmap(&results, [](TrackInfo t){return t.show();}, tracks);
-    auto slist = toQStringList(results);
-
-    return slist.join("\n\n") + "\n\n";
+    return "Implement me";
 }
 
 
@@ -87,4 +57,52 @@ void SearchWindow::on_trackChosen(const TrackInfo& track)
 {
     emit trackChosen(track);
     close();
+}
+
+void SearchWindow::on_btSearch_clicked()
+{
+    if (!spotify.isAuthenticated())
+    {
+        requestToken();
+    }
+
+    auto tracks = spotify.queryTracks(
+        ui->inputSearch->text(),
+        "track",
+        "BR"
+    );
+
+    showSearchResults(tracks);
+}
+
+
+SearchResultWidget* SearchWindow::widgetFromTrack(const TrackInfo& track)
+{
+    auto widget = new SearchResultWidget(ui->resultsContainer);
+    auto artistName = track.getArtist();
+    widget->setArtist(artistName);
+    widget->setTrackName(track.getName());
+    connect(
+        widget, &SearchResultWidget::trackChosen,
+        this, &SearchWindow::on_trackChosen
+    );
+    return widget;
+}
+
+
+void SearchWindow::showSearchResults(const QVector<TrackInfo>& tracks)
+{
+    QVector<SearchResultWidget*> widgets;
+    fmap(
+        &widgets,
+        [this](const TrackInfo& track){return this->widgetFromTrack(track);},
+        tracks
+    );
+
+    for (int i = 0; i < widgets.count(); ++i)
+    {
+        auto widget = widgets[i];
+        widget->move(0, i * widget->height());
+        widget->show();
+    }
 }

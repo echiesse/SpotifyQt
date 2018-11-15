@@ -9,6 +9,10 @@ class TrackInfo
         TrackInfo();
         TrackInfo(QString id, QString name, QString artist, QString previewUrl);
         QString show() const;
+        QString getId() const;
+        QString getName() const;
+        QString getArtist() const;
+        QString getPreviewUrl() const;
 
     private:
         QString id;
