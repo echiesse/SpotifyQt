@@ -2,8 +2,12 @@
 #define SPOTIFYAPICLIENT_H
 
 #include <QString>
-#include <string>
+#include <QVector>
+
 #include <map>
+#include <string>
+
+#include "TrackInfo.h"
 
 using namespace std;
 
@@ -16,8 +20,7 @@ class SpotifyApiClient
         bool isAuthenticated();
 
         QString getAccessToken();
-        //map<string, string> queryTracks(
-        QString queryTracks(
+        QVector<TrackInfo> queryTracks(
             QString query,
             QString type,
             QString market,
@@ -33,7 +36,6 @@ class SpotifyApiClient
 
         QByteArray genAuthorization();
         QString tokenToHeader();
-
 };
 
 #endif // SPOTIFYAPICLIENT_H

@@ -6,7 +6,6 @@
 
 #include "request.h"
 #include "util.h"
-#include "TrackInfo.h"
 
 SpotifyApiClient::SpotifyApiClient(QString clientId, QString clientSecret):
     clientId(clientId),
@@ -48,15 +47,14 @@ void SpotifyApiClient::requestToken()
 }
 
 
-QString SpotifyApiClient::queryTracks(
-//map<string, string> SpotifyApiClient::queryTracks(
+QVector<TrackInfo> SpotifyApiClient::queryTracks(
     QString query,
     QString type,
     QString market,
     int limit,
     int offset)
 {
-    auto results = map<string, string>();
+    map<string, string> results;
     QUrl url("https://api.spotify.com/v1/search");
     request req;
     ParamMap params;
@@ -72,9 +70,9 @@ QString SpotifyApiClient::queryTracks(
     headers["Authorization"] = tokenToHeader();
 
     auto content = req.get(url, headers, params);
-    QString ret;
 
     // Parsear o json resultante:
+    QVector<TrackInfo> ret;
     QJsonDocument doc = QJsonDocument::fromJson(content);
     QJsonObject jObject = doc.object();
     auto tracks = jObject["tracks"].toObject();
@@ -88,7 +86,7 @@ QString SpotifyApiClient::queryTracks(
         auto artists = item["artists"].toArray();
         auto artist = artists[0].toObject()["name"].toString();
         TrackInfo track(id, name, artist, preview_url);
-        ret += track.show() + "\n\n";
+        ret += track;
     }
 
     return ret;

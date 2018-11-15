@@ -21,6 +21,17 @@ QString toQString(string str)
 }
 
 
+QStringList toQStringList(const QVector<QString>& sVector)
+{
+    QStringList ret;
+    for (int i = 0; i < sVector.size(); ++i)
+    {
+        ret.append(sVector[i]);
+    }
+    return ret;
+}
+
+
 string toUpper(string str)
 {
     size_t length = str.size();

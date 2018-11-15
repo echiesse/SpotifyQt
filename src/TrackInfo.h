@@ -6,6 +6,7 @@
 class TrackInfo
 {
     public:
+        TrackInfo();
         TrackInfo(QString id, QString name, QString artist, QString previewUrl);
         QString show() const;
 

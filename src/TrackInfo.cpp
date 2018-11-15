@@ -3,7 +3,11 @@
 TrackInfo::TrackInfo(QString id, QString name, QString artist, QString previewUrl)
     : id(id), name(name), artist(artist), previewUrl(previewUrl)
 {
+}
 
+
+TrackInfo::TrackInfo(): id(""), name(""), artist(""), previewUrl("")
+{
 }
 
 

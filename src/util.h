@@ -8,6 +8,7 @@
 
 #include <QByteArray>
 #include <QString>
+#include <QVector>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ typedef string(strOperator)(string str);
 
 QByteArray toBase64(QString string);
 QString toQString(string str);
+QStringList toQStringList(const QVector<QString>& sVector);
 
 string toUpper(string str);
 string toLower(string str);

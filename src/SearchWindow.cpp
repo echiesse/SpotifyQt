@@ -3,6 +3,8 @@
 #include "SearchResultWidget.h"
 #include "Config.h"
 
+#include "Functional.hpp"
+
 extern Config config;
 extern Config appState;
 
@@ -49,12 +51,17 @@ QString SearchWindow::queryTrack()
     {
         requestToken();
     }
-    auto res = spotify.queryTracks(
+    auto tracks = spotify.queryTracks(
         "Dona roupa",
         "track",
         "BR"
     );
-    return res;
+
+    QVector<QString> results;
+    fmap(&results, [](TrackInfo t){return t.show();}, tracks);
+    auto slist = toQStringList(results);
+
+    return slist.join("\n\n") + "\n\n";
 }
 
 
