@@ -77,7 +77,7 @@ IOStatus saveTextToFile(const string &text, string fileName)
 //******************************************************************************
 // Funções de utilidade para o módulo
 
-inline IOStatus loadLinesFromFile(vector<string> *list, string fileName)
+IOStatus loadLinesFromFile(vector<string> *list, string fileName)
 {
     string text;
     IOStatus status;

@@ -1,5 +1,7 @@
 #include "TrackInfo.h"
 
+#include <QStringList>
+
 TrackInfo::TrackInfo(QString id, QString name, QString artist, QString previewUrl)
     : id(id), name(name), artist(artist), previewUrl(previewUrl)
 {
@@ -18,6 +20,32 @@ QString TrackInfo::show() const
     ret += name + "\n";
     ret += previewUrl + "\n";
     ret += artist;
+    return ret;
+}
+
+
+void TrackInfo::loadFromString(const QString& content)
+{
+    auto lines = content.trimmed().split("\n");
+    id = lines[0].trimmed();
+    name = lines[1].trimmed();
+    previewUrl = lines[2].trimmed();
+    artist = lines[3].trimmed();
+}
+
+
+TrackInfo* TrackInfo::newFromString(const QString& content)
+{
+    auto ret = new TrackInfo();
+    ret->loadFromString(content);
+    return ret;
+}
+
+
+TrackInfo TrackInfo::createFromString(const QString& content)
+{
+    TrackInfo ret;
+    ret.loadFromString(content);
     return ret;
 }
 

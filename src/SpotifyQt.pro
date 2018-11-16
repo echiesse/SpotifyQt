@@ -31,22 +31,24 @@ SOURCES += \
     request.cpp \
     SpotifyApiClient.cpp \
     TrackInfo.cpp \
+    Playlist.cpp \
     SearchWindow.cpp \
     SearchResultWidget.cpp \
     MainWindow.cpp \
     main.cpp
 
 HEADERS += \
-    request.h \
-    SpotifyApiClient.h \
     util.h \
     Config.h \
-    Functional.hpp \
     IOFunctions.h \
+    request.h \
+    SpotifyApiClient.h \
+    Functional.hpp \
     TrackInfo.h \
     SearchWindow.h \
     SearchResultWidget.h \
-    MainWindow.h
+    MainWindow.h \
+    Playlist.h
 
 FORMS += \
     MainWindow.ui \

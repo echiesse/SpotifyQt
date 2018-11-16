@@ -88,12 +88,13 @@ bool fall(Function f, const ContainerT &lista)
 
 
 template<typename ContainerT>
-ContainerT take(size_t n, const ContainerT &lista)
+ContainerT take(typename ContainerT::size_type n, const ContainerT &container)
 {
+    typedef typename ContainerT::size_type SizeT;
     ContainerT ret;
-    size_t tam = min(n, lista.size());
-    size_t i = 0;
-    for(typename ContainerT::const_iterator it = lista.begin(); it != lista.end() && i < tam; ++it, ++i)
+    SizeT length = std::min(n, container.size());
+    SizeT i = 0;
+    for(typename ContainerT::const_iterator it = container.begin(); it != container.end() && i < length; ++it, ++i)
     {
         ret.push_back(*it);
     }
@@ -102,7 +103,7 @@ ContainerT take(size_t n, const ContainerT &lista)
 
 
 template<typename ContainerT>
-ContainerT drop(size_t n, const ContainerT &lista)
+ContainerT drop(typename ContainerT::size_type n, const ContainerT &lista)
 {
     ContainerT ret;
     if(n < lista.size())

@@ -13,11 +13,15 @@
 extern Config config;
 extern Config appState;
 
+using namespace ecs;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    loadPlaylist();
+    showPlaylist();
 }
 
 
@@ -52,8 +56,11 @@ void MainWindow::on_btOk_clicked()
 
 void MainWindow::onTrackChosen(const TrackInfo& track)
 {
-    ui->monitor->setText(track.show());
+    playlist.addTrack(track);
+    savePlaylist();
+    showPlaylist();
 }
+
 
 void MainWindow::testGetRequest()
 {
@@ -66,8 +73,31 @@ void MainWindow::testGetRequest()
 }
 
 
+void MainWindow::savePlaylist()
+{
+    auto path = config["PLAYLIST_FILE"];
+    saveTextToFile(playlist.show().toStdString(), path);
+}
+
+
+void MainWindow::loadPlaylist()
+{
+    auto path = config["PLAYLIST_FILE"];
+    if(! fileExists(path))
+    {
+        saveTextToFile("", path);
+    }
+    playlist.loadFromFile(QString(path.c_str()));
+}
+
+
 void MainWindow::on_btCancel_clicked()
 {
     close();
 }
 
+
+void MainWindow::showPlaylist()
+{
+    ui->monitor->setText(playlist.show());
+}

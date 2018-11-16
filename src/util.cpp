@@ -32,6 +32,17 @@ QStringList toQStringList(const QVector<QString>& sVector)
 }
 
 
+QStringList toQStringList(const vector<string>& sVector)
+{
+    QStringList ret;
+    for (size_t i = 0; i < sVector.size(); ++i)
+    {
+        ret.push_back(sVector[i].c_str());
+    }
+    return ret;
+}
+
+
 string toUpper(string str)
 {
     size_t length = str.size();
@@ -168,3 +179,5 @@ int strToInt(string str)
 {
     return strtol(str.c_str(), nullptr, 10);
 }
+
+

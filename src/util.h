@@ -21,6 +21,7 @@ typedef string(strOperator)(string str);
 QByteArray toBase64(QString string);
 QString toQString(string str);
 QStringList toQStringList(const QVector<QString>& sVector);
+QStringList toQStringList(const vector<string>& sVector);
 
 string toUpper(string str);
 string toLower(string str);
