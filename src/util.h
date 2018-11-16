@@ -9,6 +9,7 @@
 #include <QByteArray>
 #include <QString>
 #include <QVector>
+#include <QWidget>
 
 using namespace std;
 
@@ -22,6 +23,7 @@ QByteArray toBase64(QString string);
 QString toQString(string str);
 QStringList toQStringList(const QVector<QString>& sVector);
 QStringList toQStringList(const vector<string>& sVector);
+void removeAllChildren(QWidget* widget, QString objectName = "");
 
 string toUpper(string str);
 string toLower(string str);

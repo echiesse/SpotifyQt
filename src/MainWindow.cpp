@@ -8,7 +8,9 @@
 #include "Config.h"
 #include "IOFunctions.h"
 #include "request.h"
-#include "searchwindow.h"
+#include "SearchWindow.h"
+#include "PlaylistItemWidget.h"
+
 
 extern Config config;
 extern Config appState;
@@ -21,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     loadPlaylist();
-    showPlaylist();
 }
 
 
@@ -88,6 +89,7 @@ void MainWindow::loadPlaylist()
         saveTextToFile("", path);
     }
     playlist.loadFromFile(QString(path.c_str()));
+    showPlaylist();
 }
 
 
@@ -100,4 +102,15 @@ void MainWindow::on_btCancel_clicked()
 void MainWindow::showPlaylist()
 {
     ui->monitor->setText(playlist.show());
+
+    removeAllChildren(ui->playlist->widget());
+    for (int i = 0; i < playlist.count(); ++i)
+    {
+        auto item = playlist[i];
+        auto widget = new PlaylistItemWidget(ui->playlist->widget());
+        widget->setItem(item);
+        widget->move(0, i * widget->height());
+        widget->show();
+    }
+
 }

@@ -181,3 +181,14 @@ int strToInt(string str)
 }
 
 
+void removeAllChildren(QWidget* widget, QString objectName)
+{
+    while(QWidget* child = widget->findChild<QWidget*>())
+    {
+        if (objectName == "" || child->objectName() == objectName)
+        {
+            child->setParent(nullptr);
+            delete child;
+        }
+    }
+}

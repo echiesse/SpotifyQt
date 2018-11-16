@@ -144,3 +144,14 @@ bool Playlist::hasTrack(const TrackInfo& track)
     );
 }
 
+
+int Playlist::count() const
+{
+    return items.size();
+}
+
+
+PlaylistItem& Playlist::operator[](int i)
+{
+    return items[i];
+}

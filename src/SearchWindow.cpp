@@ -112,9 +112,5 @@ void SearchWindow::showSearchResults(const QVector<TrackInfo>& tracks)
 
 void SearchWindow::clearResults()
 {
-    while(QWidget* widget = ui->resultsContainer->findChild<QWidget*>())
-    {
-        widget->setParent(nullptr);
-        delete widget;
-    }
+    removeAllChildren(ui->resultsContainer);
 }

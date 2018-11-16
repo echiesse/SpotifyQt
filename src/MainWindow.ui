@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>598</width>
+    <width>1207</width>
     <height>556</height>
    </rect>
   </property>
@@ -17,10 +17,10 @@
    <widget class="QTextEdit" name="monitor">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>160</y>
+      <x>610</x>
+      <y>10</y>
       <width>581</width>
-      <height>301</height>
+      <height>451</height>
      </rect>
     </property>
    </widget>
@@ -67,7 +67,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>130</y>
+      <y>10</y>
       <width>47</width>
       <height>13</height>
      </rect>
@@ -76,13 +76,36 @@
      <string>Playlist</string>
     </property>
    </widget>
+   <widget class="QScrollArea" name="playlist">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>29</y>
+      <width>581</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>579</width>
+       <height>429</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>598</width>
+     <width>1207</width>
      <height>21</height>
     </rect>
    </property>

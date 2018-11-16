@@ -35,7 +35,8 @@ SOURCES += \
     SearchWindow.cpp \
     SearchResultWidget.cpp \
     MainWindow.cpp \
-    main.cpp
+    main.cpp \
+    PlaylistItemWidget.cpp
 
 HEADERS += \
     util.h \
@@ -48,12 +49,14 @@ HEADERS += \
     SearchWindow.h \
     SearchResultWidget.h \
     MainWindow.h \
-    Playlist.h
+    Playlist.h \
+    PlaylistItemWidget.h
 
 FORMS += \
     MainWindow.ui \
     SearchWindow.ui \
-    SearchResultWidget.ui
+    SearchResultWidget.ui \
+    PlaylistItemWidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

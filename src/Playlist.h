@@ -33,6 +33,8 @@ class Playlist
         void addTrack(const TrackInfo& track);
         void removeItem(int index);
         bool hasTrack(const TrackInfo& track);
+        int count() const;
+        PlaylistItem& operator[](int i);
 };
 
 #endif // PLAYLIST_H
