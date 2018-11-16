@@ -17,22 +17,23 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    public:
+        explicit MainWindow(QWidget *parent = nullptr);
+        ~MainWindow();
 
     private slots:
-    void on_btOk_clicked();
-    void on_btCancel_clicked();
-    void onTrackChosen(const TrackInfo& track);
+        void on_btOk_clicked();
+        void on_btCancel_clicked();
+        void onTrackChosen(const TrackInfo& track);
+        void removePlaylistItem();
 
-private:
-    Ui::MainWindow *ui;
-    void testGetRequest();
-    Playlist playlist;
-    void savePlaylist();
-    void loadPlaylist();
-    void showPlaylist();
+    private:
+        Ui::MainWindow *ui;
+        void testGetRequest();
+        Playlist playlist;
+        void savePlaylist();
+        void loadPlaylist();
+        void showPlaylist();
 };
 
 #endif // MAINWINDOW_H

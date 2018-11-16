@@ -24,6 +24,7 @@ QString toQString(string str);
 QStringList toQStringList(const QVector<QString>& sVector);
 QStringList toQStringList(const vector<string>& sVector);
 void removeAllChildren(QWidget* widget, QString objectName = "");
+void deleteWidget(QWidget* widget);
 
 string toUpper(string str);
 string toLower(string str);

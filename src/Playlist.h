@@ -17,6 +17,7 @@ class PlaylistItem
         void setTrack(const TrackInfo& value);
         QString getLocalPath() const;
         void setLocalPath(const QString& value);
+        bool operator==(const PlaylistItem& other);
 };
 
 class Playlist
@@ -32,9 +33,11 @@ class Playlist
 
         void addTrack(const TrackInfo& track);
         void removeItem(int index);
+        void removeItem(const PlaylistItem& item);
         bool hasTrack(const TrackInfo& track);
         int count() const;
         PlaylistItem& operator[](int i);
+        int indexOf(const PlaylistItem& item);
 };
 
 #endif // PLAYLIST_H

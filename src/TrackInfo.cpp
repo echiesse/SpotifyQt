@@ -34,6 +34,17 @@ void TrackInfo::loadFromString(const QString& content)
 }
 
 
+bool TrackInfo::operator==(const TrackInfo& other)
+{
+    return (
+        id == other.id &&
+        name == other.name &&
+        artist == other.artist &&
+        previewUrl == other.previewUrl
+    );
+}
+
+
 TrackInfo* TrackInfo::newFromString(const QString& content)
 {
     auto ret = new TrackInfo();

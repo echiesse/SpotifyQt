@@ -16,10 +16,17 @@ class PlaylistItemWidget : public QWidget
         explicit PlaylistItemWidget(QWidget *parent = nullptr);
         ~PlaylistItemWidget();
         void setItem(const PlaylistItem& item);
+        PlaylistItem getItem() const;
+
+    private slots:
+        void on_btnRemove_clicked();
 
     private:
         Ui::PlaylistItemWidget *ui;
         PlaylistItem item;
+
+    signals:
+        void itemSelectedToRemove();
 };
 
 #endif // PLAYLISTITEMWIDGET_H

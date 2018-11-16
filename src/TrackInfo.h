@@ -18,6 +18,7 @@ class TrackInfo
         QString getPreviewUrl() const;
         bool isEmpty() const;
         void loadFromString(const QString& content);
+        bool operator==(const TrackInfo& other);
 
     private:
         QString id;

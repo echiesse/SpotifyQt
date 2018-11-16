@@ -2,6 +2,7 @@
 #include "ui_MainWindow.h"
 
 #include <QDesktopServices>
+#include <QFile>
 #include <QMessageBox>
 #include <QString>
 
@@ -111,6 +112,22 @@ void MainWindow::showPlaylist()
         widget->setItem(item);
         widget->move(0, i * widget->height());
         widget->show();
+        connect(
+            widget, &PlaylistItemWidget::itemSelectedToRemove,
+            this, &MainWindow::removePlaylistItem
+        );
     }
+}
 
+
+void MainWindow::removePlaylistItem()
+{
+    auto widget = qobject_cast<PlaylistItemWidget*>(sender());
+    auto item = widget->getItem();
+
+    playlist.removeItem(item);
+    deleteWidget(widget);
+
+    savePlaylist();
+    showPlaylist();
 }

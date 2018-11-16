@@ -4,6 +4,7 @@
 #include "request.h"
 #include "util.h"
 
+#include <QFile>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -43,6 +44,15 @@ QString PlaylistItem::getLocalPath() const
 void PlaylistItem::setLocalPath(const QString& value)
 {
     localPath = value;
+}
+
+
+bool PlaylistItem::operator==(const PlaylistItem& other)
+{
+    return (
+        localPath == other.localPath &&
+        track == other.track
+    );
 }
 
 
@@ -117,22 +127,24 @@ void Playlist::addTrack(const TrackInfo& track)
 }
 
 
-//void Playlist::removeTrack(const TrackInfo& track)
-//{
-//    if (hasTrack(track));
-//}
-
-
 void Playlist::removeItem(int index)
 {
-    if (index >= items.size()) return;
+    if (index < 0 || index >= items.size()) return;
 
-    QVector<PlaylistItem>::iterator pos = items.begin();
-    for(int i = 0; i < items.size(); ++i)
-    {
-        ++pos;
-    }
-    items.erase(pos);
+    auto path = items[index].getLocalPath();
+
+    items.remove(index);
+
+    // Defering so the file is not deleted in case of errors:
+    QFile file (path);
+    file.remove();
+}
+
+
+void Playlist::removeItem(const PlaylistItem& item)
+{
+    int index = indexOf(item);
+    removeItem(index);
 }
 
 
@@ -142,6 +154,12 @@ bool Playlist::hasTrack(const TrackInfo& track)
         [track](const PlaylistItem& item){return item.getTrack().getId() == track.getId();},
         items
     );
+}
+
+
+int Playlist::indexOf(const PlaylistItem& item)
+{
+    return items.indexOf(item);
 }
 
 

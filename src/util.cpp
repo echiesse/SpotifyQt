@@ -187,8 +187,13 @@ void removeAllChildren(QWidget* widget, QString objectName)
     {
         if (objectName == "" || child->objectName() == objectName)
         {
-            child->setParent(nullptr);
-            delete child;
+            deleteWidget(child);
         }
     }
+}
+
+void deleteWidget(QWidget* widget)
+{
+    widget->setParent(nullptr);
+    delete widget;
 }
