@@ -58,14 +58,16 @@ void Playlist::loadFromFile(QString path)
     const int ITEM_LINES = 5;
     vector<string> contents;
     loadLinesFromFile(&contents, path.toStdString());
+    fmap(&contents, trim, contents);
     auto allLines = toQStringList(contents);
 
     while(allLines.size() >= ITEM_LINES)
     {
         auto lines = take(ITEM_LINES - 1, allLines);
         auto track = TrackInfo::createFromString(lines.join("\n"));
-        allLines = drop(ITEM_LINES -1 , allLines);
-        auto localPath = take(1, allLines)[0];
+        auto localPath = allLines[ITEM_LINES - 1];
+
+        allLines = drop(ITEM_LINES, allLines);
         items.push_back(PlaylistItem(track, localPath));
         while (allLines.size() > 0 && allLines[0].trimmed() == "")
         {
@@ -77,7 +79,7 @@ void Playlist::loadFromFile(QString path)
 
 void Playlist::saveToFile(QString path)
 {
-    saveTextToFile(show().toStdString(), path.toStdString());
+    saveTextToFile(show(), path);
 }
 
 
@@ -100,20 +102,18 @@ void Playlist::addTrack(const TrackInfo& track)
 {
     if (hasTrack(track)) return;
 
-    auto name = track.getId().toStdString() + ".mp3";
+    auto fileName = track.getId() + ".mp3";
     if(track.getPreviewUrl() != "")
     {
         request req;
         auto previewData = req.get(track.getPreviewUrl());
-        fstream file(name, ios::out | ios::binary);
-        file.write(previewData.data(), previewData.size());
-        file.close();
+        saveDataToFile(previewData, fileName);
     }
     else
     {
-        name = "";
+        fileName = "";
     }
-    items.push_back(PlaylistItem(track, toQString(name)));
+    items.push_back(PlaylistItem(track, fileName));
 }
 
 

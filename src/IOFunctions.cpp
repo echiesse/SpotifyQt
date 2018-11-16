@@ -118,4 +118,24 @@ IOStatus createDir(string path)
     return ret;
 }
 
+
+// Qt extensions:
+IOStatus saveDataToFile(const QByteArray& data, QString fileName)
+{
+    fstream file(fileName.toStdString(), ios::out | ios::binary);
+    if (!file.is_open()) return STATUS_ERROR_OPENING_FILE;
+
+    file.write(data.data(), data.size());
+    if (file.bad()) return STATUS_ERROR_SAVING_FILE;
+
+    file.close();
+    return STATUS_OK;
+}
+
+
+IOStatus saveTextToFile(const QString& text, QString fileName)
+{
+    return saveTextToFile(text.toStdString(), fileName.toStdString());
+}
+
 }

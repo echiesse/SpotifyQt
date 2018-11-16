@@ -38,6 +38,8 @@ IOStatus loadLinesFromFile(vector<string> *list, string fileName);
 bool fileExists(string path);
 bool dirExists(string path);
 
+IOStatus saveDataToFile(const QByteArray& data, QString fileName);
+IOStatus saveTextToFile(const QString &text, QString fileName);
 
 } /** namespace ecs **/
 

@@ -76,7 +76,7 @@ void MainWindow::testGetRequest()
 void MainWindow::savePlaylist()
 {
     auto path = config["PLAYLIST_FILE"];
-    saveTextToFile(playlist.show().toStdString(), path);
+    playlist.saveToFile(toQString(path));
 }
 
 
