@@ -44,3 +44,16 @@ QString TrackInfo::getPreviewUrl() const
 {
     return previewUrl;
 }
+
+
+bool TrackInfo::isEmpty() const
+{
+    return (
+        id == "" &&
+        name == "" &&
+        artist == "" &&
+        previewUrl == ""
+    );
+}
+
+

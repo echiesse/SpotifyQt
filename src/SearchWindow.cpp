@@ -61,6 +61,8 @@ void SearchWindow::on_trackChosen(const TrackInfo& track)
 
 void SearchWindow::on_btSearch_clicked()
 {
+    clearResults();
+
     if (!spotify.isAuthenticated())
     {
         requestToken();
@@ -78,7 +80,7 @@ void SearchWindow::on_btSearch_clicked()
 
 SearchResultWidget* SearchWindow::widgetFromTrack(const TrackInfo& track)
 {
-    auto widget = new SearchResultWidget(ui->resultsContainer);
+    auto widget = SearchResultWidget::newFromTrack(track, ui->resultsContainer);
     auto artistName = track.getArtist();
     widget->setArtist(artistName);
     widget->setTrackName(track.getName());
@@ -104,5 +106,15 @@ void SearchWindow::showSearchResults(const QVector<TrackInfo>& tracks)
         auto widget = widgets[i];
         widget->move(0, i * widget->height());
         widget->show();
+    }
+}
+
+
+void SearchWindow::clearResults()
+{
+    while(QWidget* widget = ui->resultsContainer->findChild<QWidget*>())
+    {
+        widget->setParent(nullptr);
+        delete widget;
     }
 }

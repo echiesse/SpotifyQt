@@ -13,6 +13,7 @@ class TrackInfo
         QString getName() const;
         QString getArtist() const;
         QString getPreviewUrl() const;
+        bool isEmpty() const;
 
     private:
         QString id;

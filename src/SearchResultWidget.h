@@ -12,14 +12,20 @@ class SearchResultWidget : public QWidget
 {
         Q_OBJECT
 
+    private:
+        Ui::SearchResultWidget *ui;
+        TrackInfo track;
+
     public:
         explicit SearchResultWidget(QWidget *parent = nullptr);
         ~SearchResultWidget();
+        static SearchResultWidget* newFromTrack(
+            const TrackInfo& track,
+            QWidget* parent = nullptr
+        );
+
         void setArtist(QString artistName);
         void setTrackName(QString trackName);
-
-    private:
-        Ui::SearchResultWidget *ui;
 
     signals:
         void trackChosen(const TrackInfo& track);

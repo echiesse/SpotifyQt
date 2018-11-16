@@ -17,6 +17,7 @@ class SearchWindow : public QMainWindow
     public:
         explicit SearchWindow(QWidget *parent = nullptr);
         ~SearchWindow();
+        void clearResults();
 
     private:
         Ui::SearchWindow *ui;
