@@ -3,6 +3,8 @@
 
 #include <QDesktopServices>
 #include <QFile>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 #include <QMessageBox>
 #include <QString>
 
@@ -44,7 +46,7 @@ int showMessageBox(QString text)
 }
 
 
-void MainWindow::on_btOk_clicked()
+void MainWindow::on_btSearch_clicked()
 {
     auto searchWindow = new SearchWindow(this);
     connect(
@@ -53,6 +55,31 @@ void MainWindow::on_btOk_clicked()
     );
     searchWindow->setWindowModality(Qt::ApplicationModal);
     searchWindow->show();
+}
+
+
+void MainWindow::on_btPlay_clicked()
+{
+    auto player = new QMediaPlayer(this);
+    auto pl = new QMediaPlaylist(player);
+    for (int i = 0; i < playlist.count(); ++i)
+    {
+        auto path = playlist[i].getLocalPath();
+        pl->addMedia(QUrl::fromLocalFile(path));
+    }
+    pl->setCurrentIndex(1);
+    player->setVolume(50);
+    qDebug() << "Playing ..." ;
+    player->play();
+
+    delete player;
+    qDebug() << "Playlist finished" ;
+}
+
+
+void MainWindow::onMediaError(QMediaPlayer::Error error)
+{
+    qDebug() << error;
 }
 
 
@@ -66,12 +93,14 @@ void MainWindow::onTrackChosen(const TrackInfo& track)
 
 void MainWindow::testGetRequest()
 {
+#ifdef ECS_DEBUG
     request req;
     QUrl url("http://example.com");
     auto res = req.get(url);
     ui->monitor->setText("Resposta:");
     ui->monitor->append(res);
     ui->monitor->append("Fim !!");
+#endif
 }
 
 
@@ -94,15 +123,11 @@ void MainWindow::loadPlaylist()
 }
 
 
-void MainWindow::on_btCancel_clicked()
-{
-    close();
-}
-
-
 void MainWindow::showPlaylist()
 {
+#ifdef ECS_DEBUG
     ui->monitor->setText(playlist.show());
+#endif
 
     removeAllChildren(ui->playlist->widget());
     for (int i = 0; i < playlist.count(); ++i)

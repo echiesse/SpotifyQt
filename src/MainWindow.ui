@@ -6,24 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1207</width>
+    <width>598</width>
     <height>556</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Spotify Playlist Demo</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTextEdit" name="monitor">
-    <property name="geometry">
-     <rect>
-      <x>610</x>
-      <y>10</y>
-      <width>581</width>
-      <height>451</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
@@ -48,16 +38,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="btOk">
+      <widget class="QPushButton" name="btPlay">
        <property name="text">
-        <string>Ok</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btCancel">
-       <property name="text">
-        <string>Cancelar</string>
+        <string>Play</string>
        </property>
       </widget>
      </item>
@@ -80,9 +63,9 @@
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>29</y>
+      <y>49</y>
       <width>581</width>
-      <height>431</height>
+      <height>411</height>
      </rect>
     </property>
     <property name="widgetResizable">
@@ -94,10 +77,23 @@
        <x>0</x>
        <y>0</y>
        <width>579</width>
-       <height>429</height>
+       <height>409</height>
       </rect>
      </property>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="btSearch">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>10</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pesquisar</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -105,7 +101,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1207</width>
+     <width>598</width>
      <height>21</height>
     </rect>
    </property>
@@ -113,8 +109,6 @@
     <property name="title">
      <string>Playlist</string>
     </property>
-    <addaction name="actionNew"/>
-    <addaction name="actionOpen"/>
    </widget>
    <addaction name="menuTeste"/>
   </widget>

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMediaPlayer>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
@@ -22,11 +23,12 @@ class MainWindow : public QMainWindow
         ~MainWindow();
 
     private slots:
-        void on_btOk_clicked();
-        void on_btCancel_clicked();
         void onTrackChosen(const TrackInfo& track);
         void removePlaylistItem();
+        void on_btPlay_clicked();
+        void on_btSearch_clicked();
 
+        void onMediaError(QMediaPlayer::Error error);
     private:
         Ui::MainWindow *ui;
         void testGetRequest();
